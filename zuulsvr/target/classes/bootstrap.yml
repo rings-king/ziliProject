@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: zuulservice
+  profiles:
+    active:
+      default
+#  cloud:
+#    config:
+#      enabled: true
+#      uri: http://192.168.1.37:8888

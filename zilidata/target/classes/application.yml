@@ -1,0 +1,25 @@
+#Default port is 8761
+server:
+  port: 8889
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+logging.level.org.springframework.security: DEBUG
+
+
+#Setting logging levels
+logging:
+  level:
+    com.netflix: WARN
+    org.springframework.web: WARN
+    com.thoughtmechanix: DEBUG
+spring:
+  datasource:
+    url: jdbc:sqlserver://192.168.1.112:1433;DatabaseName=ZILI_YAJIKANBAN
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    username: yaji
+    password: yaji
+  application:
+    name: zili-server

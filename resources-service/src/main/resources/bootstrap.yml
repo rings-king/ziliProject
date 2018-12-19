@@ -1,0 +1,47 @@
+spring:
+  application:
+    name: resourcesservice
+  profiles:
+    active: dev
+  jpa:
+    open-in-view: true
+    database: MYSQL
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        jdbc.batch_size: 1500
+        order_inserts: true
+        order_updates: true
+        generate_statistics: true
+        jdbc:
+          batch_versioned_data: true
+        id:
+          new_generator_mappings: true
+  datasource:
+    url: jdbc:mysql://localhost:3306/mtqiushui.resources?autoReconnect=true&useSSL=false&characterEncoding=utf-8
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.jdbc.Driver
+  redis:
+    host: localhost
+    port: 6379
+  http:
+    multipart:
+      enabled: true
+      max-request-size: 100Mb
+      max-file-size: 100Mb
+
+
+security:
+  oauth2:
+    resource:
+      id: resourcesservice
+      user-info-uri: http://localhost:5555/api/uaa/v1/users/user
+      prefer-token-info: false
+
+web:
+  #upload-path: C:\\Users\\fp\\Desktop\\tp\\
+  upload-path: /var/www/html/resources/upload/
+image-path: /home/jux/images

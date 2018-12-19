@@ -1,0 +1,63 @@
+server:
+  port: 5555
+  tomcat:
+    max-threads: 128
+    min-spare-threads: 64
+  #Setting logging levels
+logging:
+  level:
+    com.netflix: WARN
+    org.springframework.web: WARN
+    com.thoughtmechanix: DEBUG
+
+eureka:
+  instance:
+    preferIpAddress: true
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+zuul:
+  routes:
+    materials:
+      path: /v1/materials/**
+      serviceId: resourcesservice
+      strip-prefix: false
+    uaa:
+      path: /uaa/**
+      sensitiveHeaders:
+      serviceId: auth-server
+    zili:
+      path: /data/**
+      serviceId: zili-server
+    dispatchingservice:
+      path: /dispatchingservice/**
+      serviceId: dispatchingservice
+  add-proxy-headers: true
+  sensitiveHeaders: Cookie,Set-Cookie
+  prefix: /api
+  debug:
+    request: true
+endpoints:
+  routes:
+    sensitive: false
+security:
+  oauth2:
+    client:
+      access-token-uri: http://localhost:5555/uaa/oauth/token
+      user-authorization-uri: http://localhost:5555/uaa/oauth/authorize
+      client-id: webapp
+    resource:
+      user-info-uri: http://localhost:5555/uaa/user
+      prefer-token-info: false
+resourcesservice.ribbon.ReadTimeout: 10000
+auth-server.ribbon.ReadTimeout: 10000
+dispatchingservice.ribbon.ReadTimeout: 10000
+signing.key: "345345fsdfsf5345"
+spring:
+  http:
+    multipart:
+      max-file-size: 100Mb
+      max-request-size: 100Mb
+

@@ -1,0 +1,51 @@
+eureka:
+  instance:
+    preferIpAddress: true
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+
+#Setting logging levels
+logging:
+  level:
+    com.netflix: WARN
+    org.springframework.web: WARN
+    com.thoughtmechanix: DEBUG
+spring:
+  jpa:
+    open-in-view: true
+    database: MYSQL
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        jdbc.batch_size: 1500
+        order_inserts: true
+        order_updates: true
+        generate_statistics: true
+        jdbc:
+          batch_versioned_data: true
+        id:
+          new_generator_mappings: true
+  datasource:
+    url: jdbc:mysql://localhost:3306/mtqiushui.dispatching?autoReconnect=true&useSSL=false&characterEncoding=utf-8
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.jdbc.Driver
+  redis:
+    port: 6379
+    host: localhost
+server:
+  tomcat:
+    max-threads: 128
+    min-spare-threads: 64
+security:
+  oauth2:
+    resource:
+      id: dispatchingservice
+      user-info-uri: http://localhost:5555/api/uaa/v1/users/user
+      prefer-token-info: false
+
